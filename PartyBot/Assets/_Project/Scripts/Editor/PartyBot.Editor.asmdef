@@ -1,0 +1,10 @@
+{
+    "name": "PartyBot.Editor",
+    "rootNamespace": "PartyBot.Editor",
+    "references": [
+        "PartyBot.Runtime"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ]
+}

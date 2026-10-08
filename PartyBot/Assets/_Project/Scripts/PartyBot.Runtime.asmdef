@@ -1,0 +1,8 @@
+{
+    "name": "PartyBot.Runtime",
+    "rootNamespace": "PartyBot",
+    "references": [
+        "Unity.InputSystem"
+    ],
+    "autoReferenced": true
+}
