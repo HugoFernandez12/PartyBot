@@ -44,8 +44,8 @@ Empezamos por el **mayor riesgo técnico**: la física del robot.
 
 | # | Tarea | Quién | Hecho cuando |
 |---|---|---|---|
-| 1.1 | **Prueba de física**: mismo robot con (A) joints y (B) un Rigidbody2D con colliders hijos | Yo | Hay dos robots en Sandbox |
-| 1.2 | Probar ambos, empujarlos, chocarlos, y elegir | **Tú decides** | Elegimos A o B (recomiendo B) |
+| 1.1 ✅ | **Prueba de física**: mismo robot con (A) joints y (B) un Rigidbody2D con colliders hijos | Yo | Hay dos robots en Sandbox |
+| 1.2 ✅ | Probar ambos, empujarlos, chocarlos, y elegir | **Tú decides** | **Elegido B: cuerpo compuesto** |
 | 1.3 | `PartDefinition` (ScriptableObject) + `PartBehaviour` base | Yo | Puedes crear piezas desde el menú Create |
 | 1.4 | `RobotData` / `PlacedPart` + serialización JSON + tests | Yo | Tests en verde en Test Runner |
 | 1.5 | `RobotAssembler`: `RobotData` → robot en escena | Yo | Un robot hardcodeado aparece montado |
@@ -97,6 +97,6 @@ Empezamos por el **mayor riesgo técnico**: la física del robot.
 
 | Decisión | Cuándo | Recomendación |
 |---|---|---|
-| Física: joints vs. cuerpo compuesto | Tarea 1.2 | Cuerpo compuesto (más estable) |
+| ~~Física: joints vs. cuerpo compuesto~~ | ✅ Decidido | Cuerpo compuesto (los joints darían bugs a futuro) |
 | UI: uGUI vs. UI Toolkit | Antes del Hito 2 | uGUI (drag & drop más sencillo, más tutoriales) |
 | Nombre de la carpeta del proyecto | Ahora | `PartyBot` (sin espacios) |

@@ -13,7 +13,7 @@ Juego 2D cenital para 2-4 amigos. Partidas de 15-20 min, 5 rondas. En cada ronda
 ## 2. Stack técnico
 
 - Unity (LTS reciente), 2D, URP 2D.
-- Física: Rigidbody2D + joints (FixedJoint2D / HingeJoint2D). Ver nota de riesgo en sección 6.
+- Física: **cuerpo compuesto** — un único Rigidbody2D por robot con un collider hijo por pieza. Al romperse, la pieza se separa y recibe su propio Rigidbody2D. (Decidido en la tarea 1.2 tras comparar con joints; ver sección 6.)
 - Input: Input System nuevo, multijugador local (PlayerInput + varios mandos/teclado).
 - UI: UI Toolkit o uGUI (decidir en Fase 1).
 - Datos: ScriptableObjects para piezas y minijuegos.
@@ -131,7 +131,7 @@ Un minijuego por vez, cada uno como `MinigameDefinition` con su escena, reglas y
 
 | Riesgo | Mitigación |
 |---|---|
-| Joints inestables (robots que tiemblan o explotan) | Probar pronto en Fase 1. Alternativa: un único Rigidbody2D con múltiples colliders hijos (compuesto) y las piezas "rotas" se separan creando un Rigidbody nuevo. Suele ser mucho más estable. |
+| Joints inestables (robots que tiemblan o explotan) | **Resuelto:** se descartan los joints y se usa cuerpo compuesto (tarea 1.2). La prueba con ambas opciones está en el commit `4abee0c`. |
 | Montaje libre difícil de balancear | Presupuesto de coste, límite de rejilla, repartos aleatorios de piezas. |
 | Alcance excesivo | Congelar el alcance tras Fase 5; todo lo demás es opcional. |
 | Online rompe la física | Dejarlo para el final y simular en host. |
