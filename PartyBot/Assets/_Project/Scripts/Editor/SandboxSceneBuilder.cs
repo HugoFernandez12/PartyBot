@@ -14,7 +14,7 @@ namespace PartyBot.Editor
     public static class SandboxSceneBuilder
     {
         const string ScenePath = "Assets/_Project/Scenes/Sandbox.unity";
-        const string SpritePath = "Assets/_Project/Art/WhiteSquare.png";
+        internal const string SpritePath = "Assets/_Project/Art/WhiteSquare.png";
         const string Physics2DSettingsPath = "ProjectSettings/Physics2DSettings.asset";
 
         // Medidas en unidades de Unity (1 unidad = 1 celda de robot).
