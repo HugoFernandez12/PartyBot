@@ -11,6 +11,7 @@ namespace PartyBot.Editor
     {
         const string PartsFolder = "Assets/_Project/Data/Parts";
         const string CatalogPath = "Assets/_Project/Data/PartCatalog.asset";
+        const string TuningPath = "Assets/_Project/Data/RobotTuning.asset";
 
         readonly struct PartSpec
         {
@@ -47,20 +48,46 @@ namespace PartyBot.Editor
             Debug.Log($"[PartyBot] Piezas iniciales listas en {PartsFolder} y catálogo en {CatalogPath}.");
         }
 
+        /// <summary>Si ya hay un RobotSpawner en la escena, solo le asigna catálogo y ajustes que le falten.</summary>
         [MenuItem("PartyBot/Añadir robot de prueba a la escena")]
         static void AddTestRobot()
         {
             var catalog = EnsureStarterContent();
+            var tuning = EnsureTuning();
 
-            var go = new GameObject("RobotSpawner");
-            var spawner = go.AddComponent<RobotSpawner>();
+            var spawner = Object.FindAnyObjectByType<RobotSpawner>();
+            if (spawner == null)
+            {
+                var go = new GameObject("RobotSpawner");
+                spawner = go.AddComponent<RobotSpawner>();
+                Undo.RegisterCreatedObjectUndo(go, "Añadir robot de prueba");
+            }
+
             var serialized = new SerializedObject(spawner);
-            serialized.FindProperty("catalog").objectReferenceValue = catalog;
-            serialized.ApplyModifiedPropertiesWithoutUndo();
+            AssignIfEmpty(serialized.FindProperty("catalog"), catalog);
+            AssignIfEmpty(serialized.FindProperty("tuning"), tuning);
+            serialized.ApplyModifiedProperties();
 
-            Undo.RegisterCreatedObjectUndo(go, "Añadir robot de prueba");
-            EditorSceneManager.MarkSceneDirty(go.scene);
-            Selection.activeObject = go;
+            EditorSceneManager.MarkSceneDirty(spawner.gameObject.scene);
+            Selection.activeObject = spawner.gameObject;
+        }
+
+        static void AssignIfEmpty(SerializedProperty property, Object value)
+        {
+            if (property.objectReferenceValue == null)
+                property.objectReferenceValue = value;
+        }
+
+        static RobotTuning EnsureTuning()
+        {
+            var tuning = AssetDatabase.LoadAssetAtPath<RobotTuning>(TuningPath);
+            if (tuning != null)
+                return tuning;
+
+            tuning = ScriptableObject.CreateInstance<RobotTuning>();
+            AssetDatabase.CreateAsset(tuning, TuningPath);
+            AssetDatabase.SaveAssets();
+            return tuning;
         }
 
         /// <summary>Crea lo que falte sin tocar lo que ya existe (respeta los ajustes hechos a mano).</summary>

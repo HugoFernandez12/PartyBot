@@ -11,6 +11,7 @@ namespace PartyBot.Robot
     public class RobotSpawner : MonoBehaviour
     {
         [SerializeField] PartCatalog catalog;
+        [SerializeField, Tooltip("Ajustes de conducción. Vacío = valores por defecto.")] RobotTuning tuning;
         [SerializeField] ValidationRules rules = new();
         [SerializeField] RobotData robot = SampleRobot();
         [SerializeField, Tooltip("Controlarlo con teclado (WASD + Espacio) o mando.")] bool playerControlled = true;
@@ -32,7 +33,7 @@ namespace PartyBot.Robot
                 return;
             }
 
-            Spawned = RobotAssembler.Build(robot, catalog, transform.position);
+            Spawned = RobotAssembler.Build(robot, catalog, transform.position, tuning);
             if (Spawned != null && playerControlled)
                 Spawned.gameObject.AddComponent<LocalRobotInput>();
         }

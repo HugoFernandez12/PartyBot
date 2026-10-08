@@ -114,6 +114,16 @@ namespace PartyBot.Tests
         }
 
         [Test]
+        public void Build_WithoutTuning_UsesDefaults()
+        {
+            built = RobotAssembler.Build(Robot(new PlacedPart("core", new Vector2Int(4, 4))), catalog, Vector2.zero);
+
+            Assert.AreSame(RobotTuning.Defaults, built.Tuning);
+            Assert.AreEqual(RobotTuning.Defaults.LinearDamping, built.Rigidbody.linearDamping, 1e-4f);
+            Assert.AreEqual(RobotTuning.Defaults.AngularDamping, built.Rigidbody.angularDamping, 1e-4f);
+        }
+
+        [Test]
         public void Build_WithoutCore_ReturnsNull()
         {
             LogAssert.Expect(LogType.Error, new Regex("no tiene núcleo"));

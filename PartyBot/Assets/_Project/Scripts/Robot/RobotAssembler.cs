@@ -10,16 +10,15 @@ namespace PartyBot.Robot
     /// </summary>
     public static class RobotAssembler
     {
-        // Valores de la prueba de física (tarea 1.1). Se ajustarán en la tarea 1.8.
-        const float LinearDamping = 2f;
-        const float AngularDamping = 4f;
-
         const float DirectionMarkerOffset = 0.35f;
         static readonly Vector3 DirectionMarkerSize = new(0.5f, 0.2f, 1f);
         static readonly Color DirectionMarkerColor = new(1f, 1f, 1f, 0.85f);
 
-        /// <summary>Monta el robot con el núcleo en <paramref name="position"/>. Devuelve null si no hay núcleo.</summary>
-        public static RobotBody Build(RobotData data, PartCatalog catalog, Vector2 position, Transform parent = null)
+        /// <summary>
+        /// Monta el robot con el núcleo en <paramref name="position"/>. Devuelve null si no hay núcleo.
+        /// Sin <paramref name="tuning"/> se usan <see cref="RobotTuning.Defaults"/>.
+        /// </summary>
+        public static RobotBody Build(RobotData data, PartCatalog catalog, Vector2 position, RobotTuning tuning = null, Transform parent = null)
         {
             int coreIndex = data.parts.FindIndex(p => p != null && catalog.TryGet(p.partId, out var part) && part.IsCore);
             if (coreIndex < 0)
@@ -35,13 +34,11 @@ namespace PartyBot.Robot
 
             var rb = root.AddComponent<Rigidbody2D>();
             rb.gravityScale = 0f;
-            rb.linearDamping = LinearDamping;
-            rb.angularDamping = AngularDamping;
             rb.interpolation = RigidbodyInterpolation2D.Interpolate;
             rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
 
             var body = root.AddComponent<RobotBody>();
-            body.Init(data, rb);
+            body.Init(data, rb, tuning);
             var controller = root.AddComponent<RobotController>();
 
             for (int i = 0; i < data.parts.Count; i++)

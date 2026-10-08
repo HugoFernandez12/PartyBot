@@ -23,7 +23,7 @@ namespace PartyBot.Parts
         public override void Tick(RobotCommand command)
         {
             if (command.Boost)
-                Body.Rigidbody.AddForceAtPosition((Vector2)transform.up * Power, transform.position);
+                Body.Rigidbody.AddForceAtPosition((Vector2)transform.up * (Power * Body.Tuning.ThrusterPowerMultiplier), transform.position);
 
             if (command.Boost != firing)
             {

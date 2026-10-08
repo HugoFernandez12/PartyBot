@@ -10,8 +10,6 @@ namespace PartyBot.Parts
     /// </summary>
     public class WheelBehaviour : PartBehaviour
     {
-        // Se ajustará en la tarea 1.8.
-        const float Grip = 15f;
         // Ruedas casi alineadas con el centro de masas no ayudan a girar.
         const float CenterDeadZone = 0.05f;
 
@@ -28,10 +26,11 @@ namespace PartyBot.Parts
             float throttle = command.Move.y;
             float turnLeft = -command.Move.x;
             float drive = Mathf.Clamp(throttle + turnLeft * side, -1f, 1f);
-            rb.AddForceAtPosition(forward * (drive * Power), position);
+            var tuning = Body.Tuning;
+            rb.AddForceAtPosition(forward * (drive * Power * tuning.WheelPowerMultiplier), position);
 
             float lateralSpeed = Vector2.Dot(rb.GetPointVelocity(position), right);
-            rb.AddForceAtPosition(-right * (lateralSpeed * Grip), position);
+            rb.AddForceAtPosition(-right * (lateralSpeed * tuning.WheelGrip), position);
         }
     }
 }

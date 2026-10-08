@@ -14,13 +14,25 @@ namespace PartyBot.Robot
 
         public Rigidbody2D Rigidbody { get; private set; }
         public RobotData Data { get; private set; }
+        public RobotTuning Tuning { get; private set; }
         public RobotPart Core { get; private set; }
         public IReadOnlyList<RobotPart> Parts => parts;
 
-        internal void Init(RobotData data, Rigidbody2D body)
+        internal void Init(RobotData data, Rigidbody2D body, RobotTuning tuning)
         {
             Data = data;
             Rigidbody = body;
+            Tuning = tuning != null ? tuning : RobotTuning.Defaults;
+            ApplyTuning();
+        }
+
+        void FixedUpdate() => ApplyTuning();
+
+        // Cada paso, para que los cambios en el Inspector se noten al momento.
+        void ApplyTuning()
+        {
+            Rigidbody.linearDamping = Tuning.LinearDamping;
+            Rigidbody.angularDamping = Tuning.AngularDamping;
         }
 
         internal void AddPart(RobotPart part)
