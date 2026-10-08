@@ -48,8 +48,8 @@ Empezamos por el **mayor riesgo técnico**: la física del robot.
 | 1.2 ✅ | Probar ambos, empujarlos, chocarlos, y elegir | **Tú decides** | **Elegido B: cuerpo compuesto** |
 | 1.3 ✅ | `PartDefinition` (ScriptableObject) + `PartBehaviour` base | Yo | Puedes crear piezas desde el menú Create |
 | 1.4 ✅ | `RobotData` / `PlacedPart` + serialización JSON + tests | Yo | Tests en verde en Test Runner |
-| 1.5 | `RobotAssembler`: `RobotData` → robot en escena | Yo | Un robot hardcodeado aparece montado |
-| 1.6 | 4 piezas: núcleo, bloque, rueda, propulsor (sprites = cuadrados de colores) | Yo | Se ven y tienen física |
+| 1.5 ✅ | `RobotAssembler`: `RobotData` → robot en escena | Yo | Un robot hardcodeado aparece montado |
+| 1.6 ✅ | 4 piezas: núcleo, bloque, rueda, propulsor (sprites = cuadrados de colores) | Yo | Se ven y tienen física |
 | 1.7 | Control con teclado y mando (mover, girar, activar) | Yo | Lo conduces |
 | 1.8 | Ajuste de feel (velocidad, fricción, masa) | Tú pruebas, yo ajusto | Te parece divertido moverlo |
 

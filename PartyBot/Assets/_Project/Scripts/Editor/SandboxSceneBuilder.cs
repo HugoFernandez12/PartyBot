@@ -70,7 +70,7 @@ namespace PartyBot.Editor
         }
 
         // Sprite blanco de 1x1 unidad que se tiñe con SpriteRenderer.color.
-        static Sprite GetOrCreateWhiteSprite()
+        internal static Sprite GetOrCreateWhiteSprite()
         {
             if (!File.Exists(SpritePath))
             {
