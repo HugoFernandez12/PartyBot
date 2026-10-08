@@ -514,6 +514,96 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1238502165
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1238502167}
+  - component: {fileID: 1238502166}
+  m_Layer: 0
+  m_Name: RobotSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1238502166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1238502165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5904624a8624c364592205eb368d7361, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: PartyBot.Runtime::PartyBot.Robot.RobotSpawner
+  catalog: {fileID: 11400000, guid: 702fe135f1e561b4b8cdaf50416dc5f9, type: 2}
+  rules:
+    gridWidth: 9
+    gridHeight: 9
+    maxCost: 0
+  robot:
+    version: 1
+    name: Robot de prueba
+    parts:
+    - partId: core
+      x: 4
+      y: 4
+      rotation: 0
+    - partId: block
+      x: 3
+      y: 4
+      rotation: 0
+    - partId: block
+      x: 5
+      y: 4
+      rotation: 0
+    - partId: block
+      x: 4
+      y: 5
+      rotation: 0
+    - partId: thruster
+      x: 4
+      y: 3
+      rotation: 0
+    - partId: wheel
+      x: 3
+      y: 5
+      rotation: 0
+    - partId: wheel
+      x: 5
+      y: 5
+      rotation: 0
+    - partId: wheel
+      x: 3
+      y: 3
+      rotation: 0
+    - partId: wheel
+      x: 5
+      y: 3
+      rotation: 0
+  playerControlled: 1
+--- !u!4 &1238502167
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1238502165}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1349132458
 GameObject:
   m_ObjectHideFlags: 0
@@ -1042,3 +1132,4 @@ SceneRoots:
   - {fileID: 904965875}
   - {fileID: 1349132460}
   - {fileID: 412271286}
+  - {fileID: 1238502167}

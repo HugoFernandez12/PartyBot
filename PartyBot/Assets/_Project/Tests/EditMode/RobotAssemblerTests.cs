@@ -86,6 +86,34 @@ namespace PartyBot.Tests
         }
 
         [Test]
+        public void Build_ActiveParts_GetBehaviourRegisteredInController()
+        {
+            var wheel = PartDefinition.Create("wheel", PartCategory.Locomotion, behaviour: PartBehaviourKind.Wheel);
+            var thruster = PartDefinition.Create("thruster", PartCategory.Locomotion, behaviour: PartBehaviourKind.Thruster);
+            var withActive = PartCatalog.Create(core, block, wheel, thruster);
+            try
+            {
+                built = RobotAssembler.Build(
+                    Robot(new PlacedPart("core", new Vector2Int(4, 4)), new PlacedPart("wheel", new Vector2Int(5, 4)),
+                        new PlacedPart("thruster", new Vector2Int(4, 3)), new PlacedPart("block", new Vector2Int(3, 4))),
+                    withActive, Vector2.zero);
+
+                var controller = built.GetComponent<RobotController>();
+                Assert.IsNotNull(controller);
+                Assert.AreEqual(2, controller.Behaviours.Count);
+                Assert.IsNotNull(built.Parts[1].GetComponent<WheelBehaviour>());
+                Assert.IsNotNull(built.Parts[2].GetComponent<ThrusterBehaviour>());
+                Assert.IsFalse(built.Parts[3].TryGetComponent<PartBehaviour>(out _));
+            }
+            finally
+            {
+                Object.DestroyImmediate(withActive);
+                Object.DestroyImmediate(wheel);
+                Object.DestroyImmediate(thruster);
+            }
+        }
+
+        [Test]
         public void Build_WithoutCore_ReturnsNull()
         {
             LogAssert.Expect(LogType.Error, new Regex("no tiene núcleo"));

@@ -19,11 +19,15 @@ namespace PartyBot.Editor
             public readonly Color Color;
             public readonly float Mass;
             public readonly int Health, Cost;
+            public readonly PartBehaviourKind Behaviour;
+            public readonly float Power;
 
-            public PartSpec(string file, string id, string displayName, PartCategory category, Color color, float mass, int health, int cost)
+            public PartSpec(string file, string id, string displayName, PartCategory category, Color color, float mass, int health, int cost,
+                PartBehaviourKind behaviour = PartBehaviourKind.None, float power = 0f)
             {
                 File = file; Id = id; DisplayName = displayName; Category = category;
                 Color = color; Mass = mass; Health = health; Cost = cost;
+                Behaviour = behaviour; Power = power;
             }
         }
 
@@ -31,8 +35,8 @@ namespace PartyBot.Editor
         {
             new("Core", "core", "Núcleo", PartCategory.Core, new Color(1f, 0.8f, 0.2f), 2f, 30, 0),
             new("Block", "block", "Bloque", PartCategory.Structure, new Color(0.55f, 0.6f, 0.7f), 1f, 15, 1),
-            new("Wheel", "wheel", "Rueda", PartCategory.Locomotion, new Color(0.15f, 0.15f, 0.17f), 0.8f, 10, 2),
-            new("Thruster", "thruster", "Propulsor", PartCategory.Locomotion, new Color(0.95f, 0.4f, 0.25f), 0.7f, 8, 2),
+            new("Wheel", "wheel", "Rueda", PartCategory.Locomotion, new Color(0.15f, 0.15f, 0.17f), 0.8f, 10, 2, PartBehaviourKind.Wheel, 25f),
+            new("Thruster", "thruster", "Propulsor", PartCategory.Locomotion, new Color(0.95f, 0.4f, 0.25f), 0.7f, 8, 2, PartBehaviourKind.Thruster, 80f),
         };
 
         [MenuItem("PartyBot/Crear piezas iniciales")]
@@ -108,6 +112,8 @@ namespace PartyBot.Editor
             serialized.FindProperty("mass").floatValue = spec.Mass;
             serialized.FindProperty("maxHealth").intValue = spec.Health;
             serialized.FindProperty("cost").intValue = spec.Cost;
+            serialized.FindProperty("behaviour").enumValueIndex = (int)spec.Behaviour;
+            serialized.FindProperty("power").floatValue = spec.Power;
             serialized.ApplyModifiedPropertiesWithoutUndo();
             return part;
         }

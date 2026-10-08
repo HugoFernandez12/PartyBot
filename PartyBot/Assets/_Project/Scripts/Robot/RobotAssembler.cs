@@ -14,6 +14,10 @@ namespace PartyBot.Robot
         const float LinearDamping = 2f;
         const float AngularDamping = 4f;
 
+        const float DirectionMarkerOffset = 0.35f;
+        static readonly Vector3 DirectionMarkerSize = new(0.5f, 0.2f, 1f);
+        static readonly Color DirectionMarkerColor = new(1f, 1f, 1f, 0.85f);
+
         /// <summary>Monta el robot con el núcleo en <paramref name="position"/>. Devuelve null si no hay núcleo.</summary>
         public static RobotBody Build(RobotData data, PartCatalog catalog, Vector2 position, Transform parent = null)
         {
@@ -38,6 +42,7 @@ namespace PartyBot.Robot
 
             var body = root.AddComponent<RobotBody>();
             body.Init(data, rb);
+            var controller = root.AddComponent<RobotController>();
 
             for (int i = 0; i < data.parts.Count; i++)
             {
@@ -48,11 +53,43 @@ namespace PartyBot.Robot
                     continue;
                 }
 
-                body.AddPart(CreatePart(definition, placed, i, origin, root.transform));
+                var part = CreatePart(definition, placed, i, origin, root.transform);
+                body.AddPart(part);
+
+                var behaviour = AddBehaviour(part);
+                if (behaviour != null)
+                {
+                    behaviour.Init(part, body);
+                    controller.Register(behaviour);
+                }
             }
 
             body.RecalculateMass();
             return body;
+        }
+
+        static PartBehaviour AddBehaviour(RobotPart part)
+        {
+            switch (part.Definition.Behaviour)
+            {
+                case PartBehaviourKind.Wheel: return part.gameObject.AddComponent<WheelBehaviour>();
+                case PartBehaviourKind.Thruster: return part.gameObject.AddComponent<ThrusterBehaviour>();
+                default: return null;
+            }
+        }
+
+        // Marca clara en el borde "delantero" de la pieza para ver hacia dónde empuja.
+        static void AddDirectionMarker(GameObject part, Sprite sprite)
+        {
+            var marker = new GameObject("Direction");
+            marker.transform.SetParent(part.transform, false);
+            marker.transform.localPosition = new Vector2(0f, DirectionMarkerOffset);
+            marker.transform.localScale = DirectionMarkerSize;
+
+            var renderer = marker.AddComponent<SpriteRenderer>();
+            renderer.sprite = sprite;
+            renderer.color = DirectionMarkerColor;
+            renderer.sortingOrder = 1;
         }
 
         static RobotPart CreatePart(PartDefinition definition, PlacedPart placed, int index, Vector2Int origin, Transform root)
@@ -75,6 +112,9 @@ namespace PartyBot.Robot
 
                 cell.AddComponent<BoxCollider2D>().size = Vector2.one;
             }
+
+            if (definition.Behaviour != PartBehaviourKind.None)
+                AddDirectionMarker(go, definition.Sprite);
 
             var part = go.AddComponent<RobotPart>();
             part.Init(definition, index, placed);

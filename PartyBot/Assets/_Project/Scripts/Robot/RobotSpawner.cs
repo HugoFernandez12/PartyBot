@@ -1,3 +1,4 @@
+using PartyBot.Controls;
 using PartyBot.Parts;
 using UnityEngine;
 
@@ -12,6 +13,7 @@ namespace PartyBot.Robot
         [SerializeField] PartCatalog catalog;
         [SerializeField] ValidationRules rules = new();
         [SerializeField] RobotData robot = SampleRobot();
+        [SerializeField, Tooltip("Controlarlo con teclado (WASD + Espacio) o mando.")] bool playerControlled = true;
 
         public RobotBody Spawned { get; private set; }
 
@@ -31,6 +33,8 @@ namespace PartyBot.Robot
             }
 
             Spawned = RobotAssembler.Build(robot, catalog, transform.position);
+            if (Spawned != null && playerControlled)
+                Spawned.gameObject.AddComponent<LocalRobotInput>();
         }
 
         /// <summary>Coche 3x3: ruedas en las esquinas, núcleo en el centro y propulsor detrás.</summary>

@@ -22,3 +22,5 @@ MonoBehaviour:
   mass: 1
   maxHealth: 15
   cost: 1
+  behaviour: 0
+  power: 0
