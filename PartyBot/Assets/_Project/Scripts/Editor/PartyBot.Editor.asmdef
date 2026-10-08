@@ -2,7 +2,9 @@
     "name": "PartyBot.Editor",
     "rootNamespace": "PartyBot.Editor",
     "references": [
-        "PartyBot.Runtime"
+        "PartyBot.Runtime",
+        "Unity.RenderPipelines.Universal.Runtime",
+        "Unity.RenderPipelines.Universal.2D.Runtime"
     ],
     "includePlatforms": [
         "Editor"

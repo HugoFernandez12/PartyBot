@@ -36,7 +36,7 @@ Complementa a `roadmap.md` (la visión). Este archivo es el **día a día**: tar
 | 0.3 ✅ | Instalar Git LFS y crear repo en GitHub, primer push | Tú | El repo está en GitHub |
 | 0.4 ✅ | Carpetas `Assets/_Project/...` + asmdefs (`PartyBot.Runtime`, `PartyBot.Editor`, `PartyBot.Tests.EditMode`) | Yo | Unity compila sin errores y el test `SanityTests` pasa |
 | 0.5 ✅ | Limpiar plantilla: carpeta `Welcome`, tutoriales, Visual Scripting | Yo | Proyecto limpio, compila |
-| 0.6 | Escena `Sandbox` con cámara cenital y arena con paredes | Yo (script de editor) / tú revisas | Abres la escena y ves la arena |
+| 0.6 ✅ | Escena `Sandbox` con cámara cenital y arena con paredes | Yo (script de editor) / tú revisas | Abres la escena y ves la arena |
 
 ## Hito 1 — Robot conducible (1-2 semanas)
 
