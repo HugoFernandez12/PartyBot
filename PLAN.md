@@ -31,9 +31,9 @@ Complementa a `roadmap.md` (la visión). Este archivo es el **día a día**: tar
 
 | # | Tarea | Quién | Hecho cuando |
 |---|---|---|---|
-| 0.1 | Renombrar `My project` → `PartyBot` (con Unity cerrado) | Tú | Unity abre el proyecto con el nuevo nombre |
-| 0.2 | `git init`, `.gitignore` de Unity, `.gitattributes` para LFS | Yo | `git status` no muestra `Library/` ni `Temp/` |
-| 0.3 | Instalar Git LFS y crear repo en GitHub, primer push | Tú | El repo está en GitHub |
+| 0.1 ✅ | Renombrar `My project` → `PartyBot` (con Unity cerrado) | Tú | Unity abre el proyecto con el nuevo nombre |
+| 0.2 ✅ | `git init`, `.gitignore` de Unity, `.gitattributes` para LFS | Yo | `git status` no muestra `Library/` ni `Temp/` |
+| 0.3 ✅ | Instalar Git LFS y crear repo en GitHub, primer push | Tú | El repo está en GitHub |
 | 0.4 | Carpetas `Assets/_Project/...` + asmdefs (`Core`, `Robot`, `Tests`) | Yo | Unity compila sin errores |
 | 0.5 | Limpiar plantilla: carpeta `Welcome`, Visual Scripting (opcional) | Yo propongo, tú confirmas | Proyecto limpio, compila |
 | 0.6 | Escena `Sandbox` con cámara cenital y arena con paredes | Yo (script de editor) / tú revisas | Abres la escena y ves la arena |
@@ -77,7 +77,7 @@ Empezamos por el **mayor riesgo técnico**: la física del robot.
 ## Lo que puedes hacer tú en paralelo (sin bloquearme)
 
 **Ya, esta semana**
-- [ ] Tareas 0.1 y 0.3 (renombrar carpeta, GitHub + Git LFS).
+- [x] Tareas 0.1 y 0.3 (renombrar carpeta, GitHub + Git LFS).
 - [ ] Repasar lo básico de Unity si no lo dominas: Rigidbody2D, prefabs, ScriptableObjects, Input System (1-2 h de vídeos bastan).
 - [ ] Conseguir un mando (Xbox/PS) para probar multijugador desde el principio.
 
