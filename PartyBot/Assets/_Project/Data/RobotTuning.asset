@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d387bf33cd1b4094b891abaccef0db46, type: 3}
   m_Name: RobotTuning
   m_EditorClassIdentifier: PartyBot.Runtime::PartyBot.Robot.RobotTuning
-  linearDamping: 2
-  angularDamping: 4
-  wheelPowerMultiplier: 1
-  wheelGrip: 15
+  linearDamping: 3
+  angularDamping: 1
+  wheelPowerMultiplier: 2
+  wheelGrip: 10
   thrusterPowerMultiplier: 1
